@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{titulo}}</h1>
+        <form action="https://worldofwarcraft.com/pt-br/">
+            <button class="btn" v-bind:class="btnClassLimpar" v-bind:style="btnStyleLimpar">Limpar</button>
+            <button class="btn" v-bind:class="btnClassEnviar" v-bind:style="btnStyleEnviar" @click="enviar()">Enviar</button>
+        </form>
+        <br><br>
+        <ul>
+            <li v-for="usuario in usuarios">{{ usuario.nome | truncate('6') }}</li> <!--| toUpperCase()--> 
+        </ul>
+
+    </div>
+
+
+
+    <script src="http://unpkg.com/vue"></script>
+    <script>
+        var app = new Vue({
+        el: "#app",
+        data:{
+            titulo: "Stomr Wizard",
+            btnClassLimpar:{
+                'btn-danger':'true',
+                'btn-lg':"true",
+            },
+            btnClassEnviar:{
+                'btn-primary':'true',
+                'btn-sm':"true",
+            },
+            btnStyleLimpar:{
+                'text-transform':'lowercase',
+                'font-size':"30px",
+            },
+            btnStyleEnviar:{
+                'text-transform':'uppercase',
+                'font-size':"10px",
+            },
+            usuarios:[
+                 { nome: 'Arthas'},
+                 { nome: 'Varian Wrynn'},
+                 { nome: 'Uther'},
+            ],
+        },
+
+        filters: {
+            toUpperCase(str) {
+                return str.toUpperCase();
+            },
+
+            truncate(str, length){
+                var output = str;
+                if (output.length > length) {
+                    output = str.substring (0, length) + ' ...';
+                }
+                return output;
+            }
+
+        },
+           
+        methods: {
+                enviar() {
+                    window.alert('Enviado!');
+                },
+            }
+        });
+    </script>
+</body>
+</html>
