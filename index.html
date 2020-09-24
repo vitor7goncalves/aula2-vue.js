@@ -17,7 +17,8 @@
         <ul>
             <li v-for="usuario in usuarios">{{ usuario.nome | truncate('6') }}</li> <!--| toUpperCase()--> 
         </ul>
-
+        
+        {{fullName}}
     </div>
 
 
@@ -49,6 +50,10 @@
                  { nome: 'Varian Wrynn'},
                  { nome: 'Uther'},
             ],
+
+            firstName: "",
+            lastName: "",
+            //fullName: "",
         },
 
         filters: {
@@ -66,11 +71,35 @@
 
         },
            
+        computed: {
+            fullName(){
+                return this.firstName + ' '+ this.lastName;
+            },
+        },
+        watch: {
+             
+             fullName(newValue){
+                this.updateUser();   //isto é uma funçao, e funçao fica dentro de metodos
+             },   
+            
+        },
+        
         methods: {
                 enviar() {
                     window.alert('Enviado!');
                 },
-            }
+                updateUser(){
+                    console.log("Usuário atualizado com sucesso") 
+                },
+        },
+        // watch: {
+        //     firstName(newValue){
+        //         this.fullName = newValue + ' ' + this.lastName;
+        //     },
+        //     lastName(newValue){
+        //         this.fullName = this.firstName +  ' ' + newValue ;
+        //     }
+        // },
         });
     </script>
 </body>
